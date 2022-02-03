@@ -1,17 +1,27 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
 import App from './App';
-import reportWebVitals from './reportWebVitals';
+import configStore from './store/configStore'
+import {Provider} from 'react-redux'
+import {BrowserRouter} from 'react-router-dom'
+import * as mdb from 'mdb-ui-kit'
+import "mdb-ui-kit/css/mdb.min.css"
+import './style.css'
+import { MDBIcon } from 'mdbreact';
+
+
+const store= configStore()
+
+store.subscribe(()=>{
+  console.log(store.getState())
+})
+console.log(store.getState())
 
 ReactDOM.render(
-  <React.StrictMode>
+  <BrowserRouter>
+  <Provider store={store}>
     <App />
-  </React.StrictMode>,
+  </Provider>
+  </BrowserRouter>,
   document.getElementById('root')
-);
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+)
